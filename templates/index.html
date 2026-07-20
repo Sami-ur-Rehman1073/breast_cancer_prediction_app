@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breast Cancer Prediction</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100">
+
+    <div class="max-w-7xl mx-auto py-10 px-6">
+
+        <div class="bg-white rounded-lg shadow-lg p-8">
+
+            <div class="flex justify-between items-center mb-8">
+
+                <div>
+                    <h1 class="text-3xl font-bold text-blue-700">
+                        Breast Cancer Prediction
+                    </h1>
+
+                    <p class="text-gray-500 mt-2">
+                        Enter all 30 features below and click Predict.
+                    </p>
+                </div>
+
+                <a href="/history"
+                    class="bg-green-600 text-white px-5 py-2 rounded hover:bg-green-700">
+                    View History
+                </a>
+
+            </div>
+
+            <form action="/predict" method="POST">
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                    <!-- ========================= -->
+                    <!-- Mean Features -->
+                    <!-- ========================= -->
+
+                    <div>
+                        <label class="font-semibold">Radius Mean</label>
+                        <input
+                            type="number"
+                            step="any"
+                            name="radius_mean"
+                            required
+                            class="w-full border rounded p-2 mt-1">
+                    </div>
+
+                    <div>
+                        <label class="font-semibold">Texture Mean</label>
+                        <input
+                            type="number"
+                            step="any"
+                            name="texture_mean"
+                            required
+                            class="w-full border rounded p-2 mt-1">
+                    </div>
+
+                    <div>
+                        <label class="font-semibold">Perimeter Mean</label>
+                        <input
+                            type="number"
+                            step="any"
+                            name="perimeter_mean"
+                            required
+                            class="w-full border rounded p-2 mt-1">
+                    </div>
+
+                    <div>
+                        <label class="font-semibold">Area Mean</label>
+                        <input
+                            type="number"
+                            step="any"
+                            name="area_mean"
+                            required
+                            class="w-full border rounded p-2 mt-1">
+                    </div>
+
+                    <div>
+                        <label class="font-semibold">Smoothness Mean</label>
+                        <input
+                            type="number"
+                            step="any"
+                            name="smoothness_mean"
+                            required
+                            class="w-full border rounded p-2 mt-1">
+                    </div>
+
+                    <div>
+                        <label class="font-semibold">Compactness Mean</label>
+                        <input
+                            type="number"
+                            step="any"
+                            name="compactness_mean"
+                            required
+                            class="w-full border rounded p-2 mt-1">
+                    </div>
+
+                    <div>
+                        <label class="font-semibold">Concavity Mean</label>
+                        <input
+                            type="number"
+                            step="any"
+                            name="concavity_mean"
+                            required
+                            class="w-full border rounded p-2 mt-1">
+                    </div>
+
+                    <div>
+                        <label class="font-semibold">Concave Points Mean</label>
+                        <input
+                            type="number"
+                            step="any"
+                            name="concave_points_mean"
+                            required
+                            class="w-full border rounded p-2 mt-1">
+                    </div>
+
+                    <div>
+                        <label class="font-semibold">Symmetry Mean</label>
+                        <input
+                            type="number"
+                            step="any"
+                            name="symmetry_mean"
+                            required
+                            class="w-full border rounded p-2 mt-1">
+                    </div>
+
+                    <div>
+                        <label class="font-semibold">Fractal Dimension Mean</label>
+                        <input
+                            type="number"
+                            step="any"
+                            name="fractal_dimension_mean"
+                            required
+                            class="w-full border rounded p-2 mt-1">
+                    </div>
+
+                    <!-- ========================= -->
+                    <!-- Standard Error Features -->
+                    <!-- ========================= -->
+
+                    <div>
+                        <label class="font-semibold">Radius SE</label>
+                        <input
+                            type="number"
+                            step="any"
+                            name="radius_se"
+                            required
+                            class="w-full border rounded p-2 mt-1">
+                    </div>
+
+                    <div>
+                        <label class="font-semibold">Texture SE</label>
+                        <input
+                            type="number"
+                            step="any"
+                            name="texture_se"
+                            required
+                            class="w-full border rounded p-2 mt-1">
+                    </div>
+
+                    <div>
+                        <label class="font-semibold">Perimeter SE</label>
+                        <input
+                            type="number"
+                            step="any"
+                            name="perimeter_se"
+                            required
+                            class="w-full border rounded p-2 mt-1">
+                    </div>
+
+                    <div>
+                        <label class="font-semibold">Area SE</label>
+                        <input
+                            type="number"
+                            step="any"
+                            name="area_se"
+                            required
+                            class="w-full border rounded p-2 mt-1">
+                    </div>
+
+                    <div>
+                        <label class="font-semibold">Smoothness SE</label>
+                        <input
+                            type="number"
+                            step="any"
+                            name="smoothness_se"
+                            required
+                            class="w-full border rounded p-2 mt-1">
+                    </div>
