@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction History</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100">
+
+    <div class="max-w-7xl mx-auto py-10 px-6">
+
+        <div class="bg-white rounded-lg shadow-lg p-8">
+
+            <div class="flex justify-between items-center mb-8">
+
+                <div>
+                    <h1 class="text-3xl font-bold text-blue-700">
+                        Prediction History
+                    </h1>
+
+                    <p class="text-gray-500 mt-2">
+                        All previous predictions stored in the database.
+                    </p>
+                </div>
+
+                <a href="/"
+                   class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded">
+                    New Prediction
+                </a>
+
+            </div>
+
+            <div class="overflow-x-auto">
+
+                <table class="min-w-full border border-gray-300">
+
+                    <thead class="bg-blue-600 text-white">
+
+                        <tr>
+
+                            <th class="border px-3 py-2">ID</th>
+                            <th class="border px-3 py-2">Prediction</th>
+                            <th class="border px-3 py-2">Created At</th>
+
+                            <th class="border px-3 py-2">Radius Mean</th>
+                            <th class="border px-3 py-2">Texture Mean</th>
+                            <th class="border px-3 py-2">Perimeter Mean</th>
+                            <th class="border px-3 py-2">Area Mean</th>
+                            <th class="border px-3 py-2">Smoothness Mean</th>
+                            <th class="border px-3 py-2">Compactness Mean</th>
+                            <th class="border px-3 py-2">Concavity Mean</th>
+                            <th class="border px-3 py-2">Concave Points Mean</th>
+                            <th class="border px-3 py-2">Symmetry Mean</th>
+                            <th class="border px-3 py-2">Fractal Dimension Mean</th>
+
+                            <th class="border px-3 py-2">Radius SE</th>
+                            <th class="border px-3 py-2">Texture SE</th>
+                            <th class="border px-3 py-2">Perimeter SE</th>
+                            <th class="border px-3 py-2">Area SE</th>
+                            <th class="border px-3 py-2">Smoothness SE</th>
+                            <th class="border px-3 py-2">Compactness SE</th>
+                            <th class="border px-3 py-2">Concavity SE</th>
+                            <th class="border px-3 py-2">Concave Points SE</th>
+                            <th class="border px-3 py-2">Symmetry SE</th>
+                            <th class="border px-3 py-2">Fractal Dimension SE</th>
+
+                            <th class="border px-3 py-2">Radius Worst</th>
+                            <th class="border px-3 py-2">Texture Worst</th>
+                            <th class="border px-3 py-2">Perimeter Worst</th>
+                            <th class="border px-3 py-2">Area Worst</th>
+                            <th class="border px-3 py-2">Smoothness Worst</th>
+                            <th class="border px-3 py-2">Compactness Worst</th>
+                            <th class="border px-3 py-2">Concavity Worst</th>
+                            <th class="border px-3 py-2">Concave Points Worst</th>
+                            <th class="border px-3 py-2">Symmetry Worst</th>
+                            <th class="border px-3 py-2">Fractal Dimension Worst</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% for record in history %}
+
+                        <tr class="hover:bg-gray-100">
+
+                            <td class="border px-3 py-2">{{ record.id }}</td>
+                            <td class="border px-3 py-2">{{ record.prediction }}</td>
+                            <td class="border px-3 py-2">{{ record.created_at }}</td>
+
+                            <td class="border px-3 py-2">{{ record.radius_mean }}</td>
+                            <td class="border px-3 py-2">{{ record.texture_mean }}</td>
+                            <td class="border px-3 py-2">{{ record.perimeter_mean }}</td>
+                            <td class="border px-3 py-2">{{ record.area_mean }}</td>
+                            <td class="border px-3 py-2">{{ record.smoothness_mean }}</td>
+                            <td class="border px-3 py-2">{{ record.compactness_mean }}</td>
+                            <td class="border px-3 py-2">{{ record.concavity_mean }}</td>
+                            <td class="border px-3 py-2">{{ record.concave_points_mean }}</td>
+                            <td class="border px-3 py-2">{{ record.symmetry_mean }}</td>
+                            <td class="border px-3 py-2">{{ record.fractal_dimension_mean }}</td>
+
+                            <td class="border px-3 py-2">{{ record.radius_se }}</td>
+                            <td class="border px-3 py-2">{{ record.texture_se }}</td>
+                            <td class="border px-3 py-2">{{ record.perimeter_se }}</td>
+                            <td class="border px-3 py-2">{{ record.area_se }}</td>
+                            <td class="border px-3 py-2">{{ record.smoothness_se }}</td>
+                            <td class="border px-3 py-2">{{ record.compactness_se }}</td>
+                            <td class="border px-3 py-2">{{ record.concavity_se }}</td>
+                            <td class="border px-3 py-2">{{ record.concave_points_se }}</td>
+                            <td class="border px-3 py-2">{{ record.symmetry_se }}</td>
+                            <td class="border px-3 py-2">{{ record.fractal_dimension_se }}</td>
+
+                            <td class="border px-3 py-2">{{ record.radius_worst }}</td>
+                            <td class="border px-3 py-2">{{ record.texture_worst }}</td>
+                            <td class="border px-3 py-2">{{ record.perimeter_worst }}</td>
+                            <td class="border px-3 py-2">{{ record.area_worst }}</td>
+                            <td class="border px-3 py-2">{{ record.smoothness_worst }}</td>
+                            <td class="border px-3 py-2">{{ record.compactness_worst }}</td>
+                            <td class="border px-3 py-2">{{ record.concavity_worst }}</td>
+                            <td class="border px-3 py-2">{{ record.concave_points_worst }}</td>
+                            <td class="border px-3 py-2">{{ record.symmetry_worst }}</td>
+                            <td class="border px-3 py-2">{{ record.fractal_dimension_worst }}</td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
