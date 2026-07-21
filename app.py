@@ -17,40 +17,54 @@ from database import engine
 from database import get_db
 from schemas import PredictionInput
 
-# Create Database Tables
 
+# =====================================================
+# Create Database Tables
+# =====================================================
 
 Base.metadata.create_all(bind=engine)
 
+
+# =====================================================
 # Load Trained Model
+# =====================================================
 
 model = joblib.load(MODEL_PATH)
 
+
+# =====================================================
 # FastAPI App
+# =====================================================
 
 app = FastAPI()
 
 
-# Jinja Templates
+# =====================================================
+# Templates
+# =====================================================
 
 templates = Jinja2Templates(directory="templates")
 
 
+# =====================================================
 # Home Page
+# =====================================================
 
 @app.get("/", response_class=HTMLResponse)
 def home(request: Request):
 
     return templates.TemplateResponse(
-        "index.html",
-        {
-            "request": request,
+        request=request,
+        name="index.html",
+        context={
             "prediction": None
         }
     )
 
 
-# Predict
+# =====================================================
+# Prediction
+# =====================================================
 
 @app.post("/predict", response_class=HTMLResponse)
 def predict(
@@ -59,48 +73,46 @@ def predict(
     db: Session = Depends(get_db)
 ):
 
-    # Convert user input into DataFrame
+    # Convert input to DataFrame
 
-    input_df = pd.DataFrame(
-        [
-            {
-                "radius_mean": data.radius_mean,
-                "texture_mean": data.texture_mean,
-                "perimeter_mean": data.perimeter_mean,
-                "area_mean": data.area_mean,
-                "smoothness_mean": data.smoothness_mean,
-                "compactness_mean": data.compactness_mean,
-                "concavity_mean": data.concavity_mean,
-                "concave_points_mean": data.concave_points_mean,
-                "symmetry_mean": data.symmetry_mean,
-                "fractal_dimension_mean": data.fractal_dimension_mean,
+    input_df = pd.DataFrame([
+        {
+            "mean radius": data.radius_mean,
+            "mean texture": data.texture_mean,
+            "mean perimeter": data.perimeter_mean,
+            "mean area": data.area_mean,
+            "mean smoothness": data.smoothness_mean,
+            "mean compactness": data.compactness_mean,
+            "mean concavity": data.concavity_mean,
+            "mean concave points": data.concave_points_mean,
+            "mean symmetry": data.symmetry_mean,
+            "mean fractal dimension": data.fractal_dimension_mean,
 
-                "radius_se": data.radius_se,
-                "texture_se": data.texture_se,
-                "perimeter_se": data.perimeter_se,
-                "area_se": data.area_se,
-                "smoothness_se": data.smoothness_se,
-                "compactness_se": data.compactness_se,
-                "concavity_se": data.concavity_se,
-                "concave_points_se": data.concave_points_se,
-                "symmetry_se": data.symmetry_se,
-                "fractal_dimension_se": data.fractal_dimension_se,
+            "radius error": data.radius_se,
+            "texture error": data.texture_se,
+            "perimeter error": data.perimeter_se,
+            "area error": data.area_se,
+            "smoothness error": data.smoothness_se,
+            "compactness error": data.compactness_se,
+            "concavity error": data.concavity_se,
+            "concave points error": data.concave_points_se,
+            "symmetry error": data.symmetry_se,
+            "fractal dimension error": data.fractal_dimension_se,
 
-                "radius_worst": data.radius_worst,
-                "texture_worst": data.texture_worst,
-                "perimeter_worst": data.perimeter_worst,
-                "area_worst": data.area_worst,
-                "smoothness_worst": data.smoothness_worst,
-                "compactness_worst": data.compactness_worst,
-                "concavity_worst": data.concavity_worst,
-                "concave_points_worst": data.concave_points_worst,
-                "symmetry_worst": data.symmetry_worst,
-                "fractal_dimension_worst": data.fractal_dimension_worst,
-            }
-        ]
-    )
+            "worst radius": data.radius_worst,
+            "worst texture": data.texture_worst,
+            "worst perimeter": data.perimeter_worst,
+            "worst area": data.area_worst,
+            "worst smoothness": data.smoothness_worst,
+            "worst compactness": data.compactness_worst,
+            "worst concavity": data.concavity_worst,
+            "worst concave points": data.concave_points_worst,
+            "worst symmetry": data.symmetry_worst,
+            "worst fractal dimension": data.fractal_dimension_worst,
+        }
+        ])
 
-    # Make Prediction
+    # Prediction
 
     prediction = model.predict(input_df)[0]
 
@@ -109,8 +121,7 @@ def predict(
     else:
         prediction_result = "Benign"
 
-
-   # Save Prediction
+    # Save prediction
 
     save_prediction(
         db=db,
@@ -118,18 +129,20 @@ def predict(
         prediction=prediction_result
     )
 
-    # Return Result
+    # Return HTML
 
     return templates.TemplateResponse(
-        "index.html",
-        {
-            "request": request,
+        request=request,
+        name="index.html",
+        context={
             "prediction": prediction_result
         }
     )
 
 
+# =====================================================
 # Prediction History
+# =====================================================
 
 @app.get("/history", response_class=HTMLResponse)
 def history(
@@ -137,12 +150,12 @@ def history(
     db: Session = Depends(get_db)
 ):
 
-    history = get_history(db)
+    records = get_history(db)
 
     return templates.TemplateResponse(
-        "history.html",
-        {
-            "request": request,
-            "history": history
+        request=request,
+        name="history.html",
+        context={
+            "history": records
         }
     )

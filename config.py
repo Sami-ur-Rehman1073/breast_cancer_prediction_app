@@ -3,7 +3,7 @@ import os
 # MySQL Configuration
 
 MYSQL_USERNAME = "root"
-MYSQL_PASSWORD = "your_password"
+MYSQL_PASSWORD = "sami1073"
 MYSQL_HOST = "localhost"
 MYSQL_PORT = 3306
 MYSQL_DATABASE = "breast_cancer_db"
@@ -18,6 +18,6 @@ DATABASE_URL = (
 # Trained Model Path
 
 MODEL_PATH = os.path.join(
-    "trained_models",
-    "selected_model.pkl"
+    "trained-model",
+    "logistic_regression.pkl"
 )
